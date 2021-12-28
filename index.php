@@ -10,8 +10,7 @@
     <!--mis estilos css-->
     <link rel="stylesheet" href="css/estilos.css">
     <!--para los iconos-->
-    <link rel = "stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"/>
-    
+    <link rel = "stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"/>   
 </head>
 <body>
     <!--cabecera-->
@@ -102,8 +101,7 @@
                 <button type="button" class="boton1 btn btn-lg">ANIMAL GENETICS</button>
                 <button type="button" class="boton2 btn btn-lg">US DAVIS</button>
                 <button type="button" class="boton3 btn btn-lg">LABOKLIN (C LOCUS / PINK)</button>
-            </div>
-            
+            </div>            
             <?php 
                 if(!isset($_POST['bt_merle'])=="bt_merle")
                     {
@@ -129,18 +127,21 @@
                 {
 	        ?>
             <!--tabla-->
+            <!--fila uno desactivada-->
             <form action="control.php" method="post">
                 <table>
                     <thead>
                         <tr>
                             <th class="columna titulo">Merle y Fluffy</th>
                             <th>Cotizar</th>
-                            <th>Valor<br>Final<br>(COP)</th>
+                            <th>Valor<br>Final<br>
+                            (COP)
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td class="columna">Merle 
+                            <td class="columna"><b>Merle</b>
                                 <br>
                                 $164.074
                             </td>
@@ -150,14 +151,14 @@
                                 </td>
 						    <td style="text-align: center;">$<?php echo $mer; ?></td>
                         </tr>
-                        <?php  
-                            
-                            }
-                            function tablas_3($locus)
-                            {
-                        ?>
+            <!--fila dos desavtivada-->
+            <?php                             
+                }
+                function tablas_3($locus)
+                {
+            ?>
                         <tr>
-                            <td class="columna">L Locus (fluffy)
+                            <td class="columna">L Locus <b>(fluffy)</b>
                                 <br>
                                 $164.045
                             </td>
@@ -170,41 +171,42 @@
                     </tbody>
                 </table>
             </form>
+            <!--fila uno activada-->
             <?php  
 			    
 		        }
 		    function tablas_2($vmer)
 		        {
 	        ?>
-			<form action="control.php" method="post">
+			<form action="control.php" method="post" name="convertidor">
 				<table>
                     <thead>
                         <tr>
                             <th class="columna titulo">Merle y Fluffy</th>
                             <th>Cotizar</th>
-                            <th>Valor<br>Final<br>(COP)</th>
+                            <th>Valor<br>Final<br><input type="" name="cop" value="(COP)" style="width: 98px; font-weight: 500; color: white; background: #a5b6b7; border: none; text-align: center;" disabled></th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td class="columna">Merle 
+                            <td class="columna"><b>Merle</b>
                                 <br>
-                                $164.045
+                                <input type="" name="pre" value="$164.045" style="color: black; background: white; border: none;" disabled>
                             </td>
                             <td class="check">
                                 <button class="btn btn-secondary" type="submit" value="" style="height: 24px; border-radius: 100%;" name="bt_merle_1">
                                 </button>
                             </td>
-                            <td style="text-align: center;">$<?php echo $vmer; ?></td>
-                        </tr>
-            <?php  
-			    
+                            <td><input type="" name="do" value="$<?php echo $vmer; ?>" style="border: none; text-align: center; width: 98px;" disabled></td>
+                        </tr>      
+            <!--fila dos activada-->
+            <?php  			    
 		        }
             function tablas_4($vlocus)
 		        {
 	        ?>
                         <tr>
-                            <td class="columna">L Locus (fluffy)
+                            <td class="columna">L Locus <b>(fluffy)</b>
                                 <br>
                                 $164.045
                             </td>
@@ -212,21 +214,22 @@
                                 <button class="btn btn-secondary" type="submit" style="height: 24px; border-radius: 100%;" name="bt_locus_2" value="2">
                                 </button>
                             </td>
-						    <td style="text-align: center;">$<?php echo $vlocus; ?></td>
+						    <td><input type="" name="do2" value="$<?php echo $vlocus; ?>" style="border: none; text-align: center; width: 98px;" disabled></td>
                         </tr>
                     </tbody>
 				</table>				
 			</form>
-            <?php  
-                    
+            <?php       
                 }
             ?>
+            <!--primer mensaje de terminos-->
             <p class="mensaje">** En Le Dog gestionamos todo el proceso de testeo con los distintos laboratorios para agilizar resultados y trámites, obteniendo resultados desde 8 días enviada la muestra. No obstante, por parte de los laboratorios y empresas de transporte pueden presentarse retrasos, fallos u otros inconvenientes de los cuales no somos responsables, pero realizaremos las comunicaciones y gestiones necesarias para solventar y lograr tener con éxito los resultados, es de comprender que en estos casos aislados el tiempo para obtener los resultados será mayor. **</p>
             <!--tabla de resultados-->
             <div class="conversion">
-                <button type="button" class="boton4 btn btn-lg">DOLARES</button>
-                <button type="button" class="boton5 btn btn-lg">PESOS COLOMBIANOS</button>
-
+                <!--botones de conversion-->
+                <button type="button" class="boton4 btn btn-lg" name="dolar" onclick="dolares();">DOLARES</button>
+                <button type="button" class="boton5 btn btn-lg" name="pesosC" onclick="peso();">PESOS COLOMBIANOS</button>
+                <!--resultados-->
                 <div class="resultados">
                     <p>
                         <span>Laboratorio:</span>
@@ -244,8 +247,8 @@
                         elseif(!isset($_POST['bt_merle_1'])=="bt_merle_1")
                             {
                                 $vmer=164.045;  
-                                echo $vmer;
-                            }
+                                echo $vmer; 
+                            }                                                      
                             if(!isset($_POST['bt_locus'])=="bt_locus")
                             {   
                                 $locus='';
@@ -256,7 +259,6 @@
                                 $vlocus=164.045;
                                 echo $vlocus;
                             }
-                        
                             ?>  
                         </span>
                     </p>
@@ -296,7 +298,7 @@
                     <br>
                     <p>
                         <span>Total (COP):</span>
-                        <span class="rta">$
+                        <span class="rta" style="border-bottom: 1px solid purple;">$
                         <?php
 
                             if(!isset($_POST['bt_merle'])=="bt_merle")
@@ -318,16 +320,16 @@
                                 {              
                                     $vlocus=164.045;
                                     echo $vlocus+20.000+16.404;
-                                }
-                            
+                                }            
                         ?>
                         </span>
                     </p>
                     <br>
+                    <!--mensaje de peligro-->
                     <p class="peligro">Valor aproximado calculando el TRM del día de hoy ($4101.13), el valor final se da al momento de hacer el pago.</p>
                 </div>
             </div>
-            <!--tabla morada de terminos-->
+            <!--segundo mensaje de terminos-->
             <div class="terminos">
                 <p>En Le Dog gestionamos todo el proceso de testeo con los distintos laboratorios para agilizar resultados y trámites, obteniendo resultados desde 8 días enviada la muestra. No obstante, por parte de los laboratorios y empresas de transporte pueden presentarse retrasos, fallos u otros inconvenientes de los cuales no somos responsables, pero realizaremos las comunicaciones y gestiones necesarias para solventar y lograr tener con éxito los resultados, es de comprender que en estos casos aislados el tiempo para obtener los resultados será mayor.
                 </p>
